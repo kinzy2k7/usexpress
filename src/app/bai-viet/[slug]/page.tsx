@@ -5,7 +5,6 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import AppImage from '@/components/ui/AppImage';
 import Link from 'next/link';
-import ViewTracker from './ViewTracker';
 import type { Metadata } from 'next';
 
 interface Props {
@@ -48,6 +47,13 @@ export default async function ArticlePage({ params }: Props) {
 
   if (!article) notFound();
 
+  // Increment views
+  supabase
+    .from('articles')
+    .update({ views: (article.views || 0) + 1 })
+    .eq('id', article.id)
+    .then(() => {});
+
   const formatDate = (iso: string) => {
     try {
       return new Intl.DateTimeFormat('vi-VN', {
@@ -59,8 +65,6 @@ export default async function ArticlePage({ params }: Props) {
   return (
     <main className="min-h-screen bg-[#080C0A] text-[#F0EDE8]">
       <Header />
-      <ViewTracker articleId={article.id} />
-
       {/* Hero image */}
       <div className="relative h-[60vh] min-h-[400px] w-full mt-0">
         {article.image ? (
