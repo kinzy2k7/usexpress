@@ -48,7 +48,7 @@ const emptyForm = {
   excerpt: '',
   content: '',
   image: '',
-  status: 'draft\' as \'published\' | \'draft',
+  status: 'draft' as 'published' | 'draft',
   meta_title: '',
   meta_description: '',
   slug: '',
