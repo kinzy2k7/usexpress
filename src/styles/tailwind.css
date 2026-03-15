@@ -333,3 +333,17 @@ body {
   color: var(--color-muted);
   letter-spacing: 0.03em;
 }
+/* ── Article Body Content ── */
+.article-body h1 { font-size: 1.6em; font-weight: 700; margin: 0.75em 0 0.4em; font-family: Georgia, serif; color: #F0EDE8; }
+.article-body h2 { font-size: 1.35em; font-weight: 700; margin: 0.7em 0 0.35em; font-family: Georgia, serif; color: #F0EDE8; }
+.article-body h3 { font-size: 1.15em; font-weight: 600; margin: 0.6em 0 0.3em; color: #F0EDE8; }
+.article-body p { margin: 0.75em 0; }
+.article-body strong, .article-body b { font-weight: 700; color: #F0EDE8; }
+.article-body em, .article-body i { font-style: italic; }
+.article-body ul { list-style: disc; padding-left: 1.5em; margin: 0.5em 0; }
+.article-body ol { list-style: decimal; padding-left: 1.5em; margin: 0.5em 0; }
+.article-body li { margin: 0.3em 0; }
+.article-body blockquote { border-left: 3px solid #1A6B4A; padding: 0.5em 1em; margin: 1em 0; color: rgba(240,237,232,0.65); font-style: italic; background: rgba(26,107,74,0.08); border-radius: 0 6px 6px 0; }
+.article-body a { color: #2A8B62; text-decoration: underline; }
+.article-body hr { border: none; border-top: 1px solid rgba(240,237,232,0.12); margin: 1.5em 0; }
+.article-body img { max-width: 100%; height: auto; border-radius: 8px; margin: 16px 0; display: block; }
