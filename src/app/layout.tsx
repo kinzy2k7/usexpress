@@ -1,9 +1,7 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
-import { Suspense } from 'react';
 import '../styles/tailwind.css';
 import { AuthProvider } from '@/contexts/AuthContext';
-import GoogleAnalytics from '@/components/GoogleAnalytics';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -29,20 +27,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7796825527400019"
-          crossOrigin="anonymous"
-        />
+        <script src="https://pl28947705.profitablecpmratenetwork.com/e8/3b/7c/e83b7cacb0460996530608093a9e92d3.js"></script>
       </head>
       <body>
-        <Suspense fallback={null}>
-          <GoogleAnalytics />
-        </Suspense>
         <AuthProvider>
           {children}
         </AuthProvider>
-</body>
+      </body>
     </html>
   );
 }
