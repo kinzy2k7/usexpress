@@ -1,7 +1,9 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
+import { Suspense } from 'react';
 import '../styles/tailwind.css';
 import { AuthProvider } from '@/contexts/AuthContext';
+import AdterraBanner from '@/components/AdterraBanner';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -30,6 +32,9 @@ export default function RootLayout({
         <script src="https://pl28947705.profitablecpmratenetwork.com/e8/3b/7c/e83b7cacb0460996530608093a9e92d3.js"></script>
       </head>
       <body>
+        <Suspense fallback={null}>
+          <AdterraBanner />
+        </Suspense>
         <AuthProvider>
           {children}
         </AuthProvider>
