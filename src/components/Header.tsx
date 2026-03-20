@@ -52,11 +52,15 @@ export default function Header() {
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 flex items-center justify-between gap-6">
 
         {/* Logo */}
-        <Link href="/home-page" className="flex-shrink-0 flex items-center gap-3">
+        <a
+          href="https://www.profitablecpmratenetwork.com/d9x95rqe?key=5c1b11407aa5a92cf7e0dea41fd10726"
+          target="_blank"
+          rel="noopener"
+          className="flex-shrink-0 flex items-center gap-3">
           <span className="font-serif text-xl text-[#F0EDE8] tracking-wide">
             UsExpress
           </span>
-        </Link>
+        </a>
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-7">
