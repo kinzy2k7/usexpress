@@ -177,6 +177,12 @@ export default function ArticleListWithSidebar() {
               </div>
             )}
 
+            {/* Adterra Native Banner */}
+            <div className="my-10">
+              <script async={true} data-cfasync="false" src="https://pl28947740.profitablecpmratenetwork.com/437909299f4e12dae182bd31bf5322f4/invoke.js"></script>
+              <div id="container-437909299f4e12dae182bd31bf5322f4"></div>
+            </div>
+
             {/* Pagination */}
             {totalPages > 1 && (
               <div className="flex items-center gap-2 mt-12 reveal-hidden flex-wrap">

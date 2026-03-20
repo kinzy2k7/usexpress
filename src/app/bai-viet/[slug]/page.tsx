@@ -127,6 +127,12 @@ export default async function ArticlePage({ params }: Props) {
           <p className="text-[#F0EDE8]/30 italic">Bài viết chưa có nội dung.</p>
         )}
 
+        {/* Adterra Native Banner */}
+        <div className="my-12">
+          <script async={true} data-cfasync="false" src="https://pl28947740.profitablecpmratenetwork.com/437909299f4e12dae182bd31bf5322f4/invoke.js"></script>
+          <div id="container-437909299f4e12dae182bd31bf5322f4"></div>
+        </div>
+
         {/* Back */}
         <div className="mt-16 pt-8 border-t border-white/[0.08]">
           <Link href="/home-page" className="read-more-link">
