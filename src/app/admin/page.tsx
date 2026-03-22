@@ -231,6 +231,7 @@ export default function AdminPage() {
     setForm(emptyForm);
     setSavedSlug(payload.slug);
     setFormSuccess(true);
+  };
 
   const cancelEdit = () => {
     setEditingId(null);
