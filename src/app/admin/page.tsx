@@ -67,6 +67,7 @@ export default function AdminPage() {
   const [filterStatus, setFilterStatus] = useState<'all' | 'published' | 'draft'>('all');
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
   const [formSuccess, setFormSuccess] = useState(false);
+  const [savedSlug, setSavedSlug] = useState('');
   const [loadingArticles, setLoadingArticles] = useState(true);
   const [saving, setSaving] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
@@ -228,12 +229,8 @@ export default function AdminPage() {
 
     setSaving(false);
     setForm(emptyForm);
+    setSavedSlug(payload.slug);
     setFormSuccess(true);
-    setTimeout(() => {
-      setFormSuccess(false);
-      setActiveTab('articles');
-    }, 1800);
-  };
 
   const cancelEdit = () => {
     setEditingId(null);
@@ -411,6 +408,18 @@ export default function AdminPage() {
                           <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                         </svg>
                       </button>
+                      {article.slug && (
+                        <Link
+                          href={`/bai-viet/${article.slug}`}
+                          target="_blank"
+                          className="p-2 text-[#F0EDE8]/40 hover:text-[#2A8B62] transition-colors"
+                          title="Xem bài viết"
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                          </svg>
+                        </Link>
+                      )}
                       {deleteConfirm === article.id ? (
                         <div className="flex items-center gap-1">
                           <button onClick={() => deleteArticle(article.id)} className="px-2 py-1 text-xs bg-red-500/20 text-red-400 border border-red-500/30 rounded font-sans">Xoá</button>
@@ -441,15 +450,87 @@ export default function AdminPage() {
         {activeTab === 'create' && (
           <div className="max-w-3xl">
             {formSuccess ? (
-              <div className="flex items-center gap-3 bg-[#1A6B4A]/20 border border-[#1A6B4A]/30 rounded-lg px-6 py-5">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[#1A6B4A]">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-                <div>
-                  <div className="text-[#F0EDE8]/90 font-sans text-sm font-600">
-                    {editingId ? 'Bài viết đã được cập nhật!' : 'Bài viết đã được tạo thành công!'}
+              <div className="bg-[#1A6B4A]/10 border border-[#1A6B4A]/30 rounded-xl px-6 py-6">
+                {/* Header */}
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-9 h-9 rounded-full bg-[#1A6B4A]/20 flex items-center justify-center flex-shrink-0">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-[#1A6B4A]">
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
                   </div>
-                  <div className="text-[#F0EDE8]/40 font-sans text-xs mt-0.5">Đang chuyển về danh sách...</div>
+                  <div>
+                    <div className="text-[#F0EDE8] font-sans text-sm font-600">
+                      {savedSlug && articles.find(a => a.slug === savedSlug)?.status === 'published'
+                        ? '🎉 Bài viết đã được đăng!'
+                        : '✅ Bài viết đã được lưu!'}
+                    </div>
+                    <div className="text-[#F0EDE8]/40 font-sans text-xs mt-0.5">
+                      {articles.find(a => a.slug === savedSlug)?.title || ''}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Article link */}
+                {savedSlug && (
+                  <div className="mb-5 p-4 bg-[#080C0A] rounded-lg border border-white/[0.07]">
+                    <div className="text-xs text-[#F0EDE8]/40 font-sans uppercase tracking-wider mb-2">Link bài viết</div>
+                    <div className="flex items-center gap-2">
+                      <code className="flex-1 text-sm text-[#2A8B62] font-mono truncate">
+                        /bai-viet/{savedSlug}
+                      </code>
+                      <button
+                        onClick={() => navigator.clipboard.writeText(`${window.location.origin}/bai-viet/${savedSlug}`)}
+                        className="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 bg-white/[0.05] hover:bg-white/[0.08] border border-white/[0.1] rounded-md text-xs text-[#F0EDE8]/60 hover:text-[#F0EDE8] transition-all font-sans"
+                        title="Copy link"
+                      >
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                        </svg>
+                        Copy
+                      </button>
+                      <Link
+                        href={`/bai-viet/${savedSlug}`}
+                        target="_blank"
+                        className="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 bg-[#1A6B4A] hover:bg-[#1A6B4A]/80 rounded-md text-xs text-white transition-all font-sans"
+                      >
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                        </svg>
+                        Xem bài viết
+                      </Link>
+                    </div>
+                  </div>
+                )}
+
+                {/* Actions */}
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => {
+                      setFormSuccess(false);
+                      setSavedSlug('');
+                      setActiveTab('articles');
+                    }}
+                    className="flex items-center gap-2 px-4 py-2 bg-white/[0.05] hover:bg-white/[0.08] border border-white/[0.1] rounded-lg text-sm text-[#F0EDE8]/70 hover:text-[#F0EDE8] transition-all font-sans"
+                  >
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M19 12H5M12 5l-7 7 7 7"/>
+                    </svg>
+                    Về danh sách
+                  </button>
+                  <button
+                    onClick={() => {
+                      setFormSuccess(false);
+                      setSavedSlug('');
+                      setEditingId(null);
+                      setForm(emptyForm);
+                    }}
+                    className="flex items-center gap-2 px-4 py-2 bg-[#1A6B4A]/20 hover:bg-[#1A6B4A]/30 border border-[#1A6B4A]/30 rounded-lg text-sm text-[#F0EDE8]/80 hover:text-[#F0EDE8] transition-all font-sans"
+                  >
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 5v14M5 12l7-7 7 7"/>
+                    </svg>
+                    Tạo bài viết mới
+                  </button>
                 </div>
               </div>
             ) : (
