@@ -1,8 +1,16 @@
 'use client';
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+
+const HIDDEN_PATHS = ['/admin', '/login', '/register'];
 
 export default function AdterraBanner() {
+  const pathname = usePathname();
+  const isHidden = HIDDEN_PATHS.some(p => pathname?.startsWith(p));
+
   useEffect(() => {
+    if (isHidden) return;
+
     const atOptions = {
       key: 'b41cc3efe529fef7b58fa621f726e5f1',
       format: 'iframe',
@@ -17,7 +25,9 @@ export default function AdterraBanner() {
     script.src = '//pl28947740.profitablecpmratenetwork.com/b41cc3efe529fef7b58fa621f726e5f1/invoke.js';
     script.async = true;
     document.getElementById('adterra-banner-320x50')?.appendChild(script);
-  }, []);
+  }, [isHidden]);
+
+  if (isHidden) return null;
 
   return (
     <div className="flex justify-center items-center w-full py-2 bg-transparent">
